@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <title>รายละเอียดโต๊ะ</title>
+    <style>
+        .scrollbar {
+            background-color: #ffffff;
+            float: left;
+            height: 29rem;
+            margin-top: 15px;
+            width: 100%;
+            overflow-y: scroll;
+            border-radius: 10px;
+        }
+
+        .force-overflow {
+            min-height: 450px;
+            padding: 0px 10px 10px 10px;
+            font-size: 25px
+        }
+
+        #style-1::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: #F5F5F5;
+        }
+    </style>
+</head>
+
+<body style="background-color: orange; padding: 40px;">
+
+    <a href="/middle/index" class="btn btn-danger" type="button">ย้อนกลับ</a>
+    <h1 style="text-align: center; margin-bottom: 30px; margin-top: -20px; color: #F5F5F5;">รายละเอียด</h1>
+    <% Object.values(tabledetail).forEach(function(item) { %>
+        <div
+            style="background-color: rgb(255, 214, 138); float: right; width: 45%; height: 35rem; padding: 20px; border-radius: 15px; ">
+            <div style="font-size: 25px; text-align: center; font-size: 40px;margin:25px">
+                <input type="text" hidden value="<%=item.tableid%>" id="table" name="table">
+                โต๊ะที่ : <%=item.tableid%>
+            </div>
+            <div style="font-size: 25px; text-align: center; font-size: 30px; margin:25px">
+                ราคาอาหารรวม : <span value="sumprice" id="sumprice" name="sumprice"></span>&nbsp;บาท <br>
+            </div>
+            <button id="openTableButton" class="btn btn-success"
+                style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; width: 80%; font-size: 30px;">เปิดโต๊ะ</button><br>
+            <button id="closeTableButton" class="btn btn-secondary"
+                style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; width: 80%; font-size: 30px;">ปิดโต๊ะ</button><br>
+            <button onclick="printPDF()" class="btn btn-danger"
+                style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; width: 80%; font-size: 30px;">พิมพ์ใบสั่งอาหาร</button><br>
+            <iframe hidden id="pdfFrame" src="/middle/receipt/<%=item.tableid%>"></iframe>
+            <input hidden type="text" value="<%=item.tableid%>" id="tableInput">
+            <button onclick="printqr()" class="btn btn-success" id="tableButton" name="tableButton"
+                style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; width: 80%; font-size: 30px;">QR
+                code</button><br>
+            <iframe hidden id="pdfFrameqr" src="/middle/gen/<%=item.tableid%>"></iframe>
+
+        </div>
+
+        <div
+            style="background-color: rgb(255, 214, 138); float: left; width: 45%; height: 35rem; padding: 20px; border-radius: 15px;">
+            <div style="font-size: 30px; ">รายละเอียดเมนู</div>
+            <div class="scrollbar" id="style-1">
+
+                <div class="card" style=>
+                    <ul class="list-group list-group-flush">
+                        <% Object.values(item.order).forEach(function(itemorder,index) { %>
+                            <input type="text" hidden value="<%=itemorder%>" id="orderone">
+                            <li class="list-group-item" style="font-size: 20px;">
+                                เมนู : <%= itemorder.menuname %>
+                                    &emsp;&emsp; จำนวน : X <%= itemorder.set %>
+
+                                        &emsp;&emsp; ราคาเมนู : <%= itemorder.menuprice %> ฿<br>
+
+                                            รายละเอียดอาหาร : <%= itemorder.comment %> <br>
+
+                                                ราคารวมเมนู : <%= itemorder.totalprice %> <br>
+                                                    <input type="text" value="<%=itemorder.totalprice%>"
+                                                        id="ordertotalprice" name="ordertotalprice" hidden>
+                                                    --------------------------------------------------<br>
+                                                    <% Object.values(itemorder.option).forEach(function(itemoption){ %>
+                                                        ชื่อเมนูเสริม : <%= itemoption.name %>
+                                                            <input type="text" hidden value="<%=itemoption.price%>"
+                                                                id="optionprice" name="optionprice">
+                                                            ราคา : <%= itemoption.price %> ฿<br>
+                                                                <% }) %>
+                                                                    <a class="btn btn-danger"
+                                                                        href="/middle/deletemenu/<%=itemorder._id%>/<%=item.tableid%> ">ลบ</a>
+
+
+                                                                    <% }) %>
+                            </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <% }) %>
+            <!-- //สถานะเปิดโต๊ะ// -->
+            <script>
+                document.getElementById("openTableButton").addEventListener("click", function () {
+                    let table = document.getElementById("table").value;
+                    console.log(table);
+                    let url = '/middle/status/' + table;
+
+                    fetch(url, {
+                        method: 'POST',
+                        body: JSON.stringify({ value: true }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response from the server here
+                            console.log(data);
+                            Swal.fire(
+                                'เปิดโต๊ะเรียบร้อย',
+                                '',
+                                'success'
+                            )
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+
+            </script>
+
+            <!-- //สถานะปิดโต๊ะ// -->
+            <script>
+                document.getElementById("closeTableButton").addEventListener("click", function () {
+                    let table = document.getElementById("table").value;
+                    console.log(table);
+                    let url = '/middle/status/' + table;
+
+                    fetch(url, {
+                        method: 'POST',
+                        body: JSON.stringify({ value: false }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response from the server here
+                            console.log(data);
+                            Swal.fire(
+                                'ปิดโต๊ะเรียบร้อย',
+                                '',
+                                'success'
+                            )
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+
+            </script>
+
+
+            <script>
+                function printPDF() {
+                    // Get the iframe element
+                    var iframe = document.getElementById('pdfFrame');
+
+                    // Check if the iframe content has loaded
+                    if (iframe.contentWindow && iframe.contentWindow.print) {
+                        // Call the print function of the iframe's content window
+                        iframe.contentWindow.print();
+                    } else {
+                        alert("The PDF could not be printed. Please ensure the PDF is loaded.");
+                    }
+                }
+
+                function printqr() {
+                    // Get the iframe element
+                    var iframe = document.getElementById('pdfFrameqr');
+
+                    // Check if the iframe content has loaded
+                    if (iframe.contentWindow && iframe.contentWindow.print) {
+                        // Call the print function of the iframe's content window
+                        iframe.contentWindow.print();
+                    } else {
+                        alert("The PDF could not be printed. Please ensure the PDF is loaded.");
+                    }
+                }
+            </script>
+
+            <script>
+                //คำนวนค่าอาหาร
+                let sumtotal = 0;
+                let optiontotal = 0;
+                let optionsum = document.querySelectorAll("#optionprice");
+                let totalsum = document.querySelectorAll("#ordertotalprice");
+
+                totalsum.forEach(function (item) {
+                    console.log(item.value);
+                    sumtotal = parseInt(sumtotal) + parseInt(item.value);
+                });
+
+                optionsum.forEach(function (itemop) {
+                    console.log(itemop.value);
+                    optiontotal = parseInt(optiontotal) + parseInt(itemop.value);
+                });
+
+                console.log(optiontotal);
+                console.log(sumtotal);
+                sum = parseInt(optiontotal) + parseInt(sumtotal);
+                console.log(sum);
+                document.getElementById("sumprice").innerHTML = sum;
+            </script>
+
+</body>
+
+</html>

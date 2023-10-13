@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/stylesheets/user/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/stylesheets/user/detail.css">
+    <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <title>รายละเอียด</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <img src='/public/images/logobander.png' alt='imagebander' class='imgbander'>
+        <a href="/customer/promotion/<%=table%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
+                class='iconchevron_left'></a>
+        <a href="/customer/cart/<%=table%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
+                alt="cart" class="iconcart"></a>
+    </header>
+
+    <div class="manu" style="padding: 10px; font-family: 'Kanit', sans-serif; color: white; font-size: 20px; ">
+        <p hidden id="tableid">
+            <%=table%>
+        </p>
+        <h1 style="font-size: 30px;">รายละเอียดเมนูอาหาร</h1>
+        <img src="/public/uploads/<%=detail.img%>" alt="image" id="imagemenu" width="200"
+            style="border-radius: 15px; margin-bottom: 10px;"><br>
+        <h3 id="menuname" style="font-size: 30px;">
+            <%=detail.name%>
+        </h3>
+        <input type="text" hidden value="<%=detail._id%>" name="" id="menuid">
+        <span style="font-size: 30px;">ราคา : <span id="thisprice">
+                <%=detail.price%>
+            </span></span>
+        <div style="margin-top: 20px;">
+            <button class="btn btn-light btn-sm" onclick="poporder()" id="pop" style="font-size: 20px; width: 10%; margin-right: 15px;">-</button>
+            <input readonly id="countorder" style="width: 80px; text-align: center; border-radius: 15px; font-size: 25px;" type="number"
+                value="1">
+            <button class="btn btn-light btn-sm" onclick="pushorder()" id="push" style="font-size: 20px; width: 10%; margin-left: 15px;">+</button>
+        </div>
+
+        <div>
+            <% if (option.length> 0) { %>
+                <p style="font-size: 30px; margin-bottom: -5px; margin-top: 20px;">รายละเอียด</p>
+                <% option.forEach(function(options) { %>
+                    <input type="text" hidden name="" value="<%=options._id%>" id="optionid">
+                    <input type="text" hidden name="" value="<%=options.price%>" id="<%=options._id%>">
+                    <input type="text" hidden name="" id="optionprice" value="<%= options.price%>">
+                    <span class="form-check-label">
+                        <div class="list-group"
+                            style="width: 50%; margin-bottom: 5px; margin-top: 5px; margin-left: auto; margin-right: auto; display: block;">
+                            <label class="list-group-item">
+                                <input class="form-check-input" type="checkbox"
+                                    value="<%=options._id%>,<%=options.name%>,<%=options.price%>" id="flexCheckDefault"
+                                    style="margin-right: 5px;">
+                                <%=options.name%><span>
+                                        <%=options.price%>฿
+                                    </span>
+                            </label>
+                        </div>
+
+                        <% }) %>
+                            <% } else { %>
+                                <p hidden>nooooo</p>
+                                <% } %>
+        </div>
+        <input class="form-control" id="comment" placeholder="รายละเอียดเพิ่มเติม" type="text"
+            style="font-size: 20px; width: 80%; margin-left: auto; margin-right: auto; display: block; margin-top: 15px;">
+        <div>
+            <input hidden type="text" name="id" value="<%=detail._id%>">
+        </div>
+        <div style="margin-top: 20px; font-size: 25px;">
+            <span>ราคารวม
+                <span id="presentprice">
+                    <%=detail.price%>
+                </span>
+                ฿</span>
+        </div>
+
+        <button onclick="sendtocart()" type="submit" class="btn btn-success"
+            style="width: 35%; margin-top: 15px; margin-bottom: 15px; font-size: 20px;">เพิ่มลงตะกร้า</button>
+
+    </div>
+    <script src="/public/javascripts/addtocart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Receipt</title>
+
+    <style>
+        body {
+            font-size: 16px;
+            font-family: 'Kanit', sans-serif;
+            /* Adjust the font size as needed */
+        }
+
+        h2 {
+            font-size: 24px;
+            /* Adjust the heading font size */
+        }
+
+        p {
+            margin: 8px 0;
+            /* Adjust spacing between paragraphs */ 
+        }
+    </style>
+</head>
+
+<body>
+    <% Object.values(menu).forEach(function(item) { %>
+        <img src="/public/images/logobander.png" alt="logobander" style="width: 80%; margin-left: auto; margin-right: auto; display: block; margin-top: 15px; margin-bottom: 15px;">
+        <h2 style="text-align: center;">ใบสั่งอาหาร</h2>
+        --------------------------
+        <p style="text-align: center;">Order Table : <%=item.tableid%></p>
+        <p id="dateInfo" style="font-size: 10px; text-align: center;"></p>
+        <p id="timeInfo" style="font-size: 10px; text-align: center;"></p>
+        --------------------------
+        <% Object.values(item.order).forEach(function(itemorder,index) { %>
+
+            <p><%= index + 1 %> : <%= itemorder.menuname %>&emsp;  x <%= itemorder.set %></p>
+            <p style="font-size: 10px;">รายละเอียดอาหาร : <%= itemorder.comment %> </p>
+            <% Object.values(itemorder.option).forEach(function(itemoption){
+                %>
+            <p>เมนูเสริม : <%= itemoption.name %></p>
+            
+            <% }) %>
+            --------------------------
+            <% }) %>
+        <% }) %>
+        <script>
+            // สร้างอ็อบเจ็กต์ Date ปัจจุบัน
+            var currentDate = new Date();
+
+            // แสดงวันที่และเวลาปัจจุบัน
+            console.log(currentDate);
+
+            var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var dayOfWeek = daysOfWeek[currentDate.getDay()];
+
+            // แสดงวันที่แยกออกมา
+            var day = currentDate.getDate();
+            var month = currentDate.getMonth() + 1; // เดือนจะเริ่มที่ 0 เพราะฉะนั้นต้องบวก 1
+            var year = currentDate.getFullYear();
+
+            console.log(`week: ${dayOfWeek},วันที่: ${day}, เดือน: ${month}, ปี: ${year}`);
+
+            // แสดงเวลาแยกออกมา
+            var hours = currentDate.getHours();
+            var minutes = currentDate.getMinutes();
+            var seconds = currentDate.getSeconds();
+
+            console.log(`เวลา: ${hours}:${minutes}:${seconds}`);
+            var dateInfo = document.getElementById('dateInfo');
+            dateInfo.textContent = `${day}/${month}/${year}`;
+
+            var timeInfo = document.getElementById('timeInfo');
+            timeInfo.textContent = `เวลา: ${hours}:${minutes}:${seconds}`;
+        </script>
+</body>
+
+</html>

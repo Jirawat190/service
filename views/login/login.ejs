@@ -9,24 +9,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="background"></div>
 
-    <form action="/admin" method="post">
+    <form action="/login" method="POST">
         <div class="logo">
-            <img src="/public/images/logo.png" alt="logo" class="center" width="200" height="200" >
-        </div>       
+            <img src="/public/images/logo.png" alt="logo" class="center" width="200" height="200">
+        </div>
         <label for="username">Username</label>
         <input type="text" name="username">
-        
+
         <label for="password">Password</label>
         <input type="text" name="password">
-        <div style="text-align: center; margin-top: 25px;"><%= loginfall %></div>
+        <div style="text-align: center; margin-top: 25px;">
+            <p>
+                <%= status%>
+            </p>
+
+        </div>
         <button type="submit">Log In</button>
     </form>
-    
 </body>
 
 </html>

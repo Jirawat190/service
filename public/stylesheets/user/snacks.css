@@ -1,0 +1,11 @@
+body{
+    font-family: 'Kanit', sans-serif;
+}
+
+.box-snacks {
+    border-radius: 40px;
+    background-color: #f33d3d;
+    height: 10rem;
+    font-family: 'Kanit', sans-serif;
+}
+

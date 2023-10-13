@@ -4,79 +4,74 @@
 <head>
     <title>admin</title>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/admin/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
-<body>
 
-    <div class="navarea">
-        <div class="topnav">
-            <img src="/public/images/logobander.png" class="imgbander">
-        </div>
-
-        <aside class="sidebar">
+<div class="topnav">
+    <img src="/public/images/logobander.png" class="imgbander">
+</div>
+<div class="navarea">
+    <div class="container-fluid">
+        <div class="row">
+          <!-- Sidebar -->
+          <aside class="col-md-3 col-lg-2 sidebar">
+            
             <nav class="sidebar-nav">
-                <ul>
-                    <li>
-                        <a href="/index">
-                            <span class="fontmanu">ร้านอาหาร</span>
-                        </a>
-
-                        <ul class="nav-flyout">
-                            <li>
-                                <a href="/editmanu">จัดการเมนู</a>
-                            </li>
-                            <li>
-                                <a href="/foodgroup">จัดการหมวด</a>
-                            </li>
-                            <li>
-                                <a href="/editfood">จัดการโต๊ะ/รายการอาหาร</a>
-                            </li>
-                            <li>
-                                <a href="/Promotion">จัดการโปรโมชัน</a>
-                            </li>
-                        </ul>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" href="/index">
+                    <span class="fontmanu">ร้านอาหาร</span>
+                  </a>
+                  <ul class="nav-flyout">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/editmanu">จัดการเมนู</a>
                     </li>
-
-                    <li>
-                        <a href="#">
-                            <span class="fontmanu">สมาชิก</span>
-                        </a>
-
-                        <ul class="nav-flyout">
-                            <li>
-                                <a href="/manage">จัดการสมาชิก</a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-
-
-                        </ul>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/foodgroup">จัดการหมวด</a>
                     </li>
-
-                    <li>
-                        <a href="/total">
-                            <span class="fontmanu">ยอดขาย</span>
-                        </a>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/edittable">จัดการโต๊ะ/รายการอาหาร</a>
                     </li>
-
-                </ul>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/option">จัดการเมนูเสริม/รายการอาหาร</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/Promotion">จัดการโปรโมชัน</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span class="fontmanu">สมาชิก</span>
+                  </a>
+                  <ul class="nav-flyout">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/manage">จัดการสมาชิก</a>
+                    </li>
+                    <!-- Add more sub-items as needed -->
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/total">
+                    <span class="fontmanu">ยอดขาย</span>
+                  </a>
+                </li>
+              </ul>
             </nav>
-        </aside>
-
-        <div class="footnav">
-            <a href="/">
+            <div class="footnav">
+              <a href="/" class="btn btn-primary">
                 <span class="fontmanu">Log out</span>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="manuarea">
-   
+              </a>
+            </div>
+          </aside>
+          <!-- Main Content -->
+          <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            
+         
