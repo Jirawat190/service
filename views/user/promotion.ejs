@@ -5,11 +5,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <div>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      
+      <% Object.values(ran).forEach(function(random) { %>
       <% Object.values(promotion).forEach(function(itempro, index) { %>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <a href="/customer/detailpro/<%=itempro._id%>/<%=table%>" type="submit">
+            <a href="/customer/detailpro/<%=itempro._id%>/<%=table%>/<%=random.random%>" type="submit">
               <img src="/uploads/<%=itempro.img%>" class="d-block w-100" alt="...">
             </a>
           </div>
@@ -36,8 +36,9 @@
       <div class="card-body">
         <h5 class="card-title"><%=itempro.name%></h5>
         <p class="card-text">ราคา : <%=itempro.price%> ฿</p>
-        <a href="/customer/detailpro/<%=itempro._id%>/<%=table%>" type="submit" class="btn btn-primary" style="background-color: blueviolet;">เลือก</a>
+        <a href="/customer/detailpro/<%=itempro._id%>/<%=table%>/<%=random.random%>" type="submit" class="btn btn-primary" style="background-color: blueviolet;">เลือก</a>
       </div>
     </div>
+    <% }) %>
     <% }) %>
       <%- include('./endlayoutfood')%>

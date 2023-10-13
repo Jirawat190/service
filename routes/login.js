@@ -420,11 +420,9 @@ router.get('/edittable', async (req, res) => {
 router.post('/inserttable', upload, async (req, res) => {
   let newtable = await req.body.Tableid
   let seat = await req.body.seat
-  //qrcode = GenQR('https://88a9-2403-6200-88a4-d2-1f5-349d-62f0-ddec.ngrok-free.app/customer/promotion/' + newtable,'public/uploads/table'+newtable+'.png', newtable);
   let data = new Table({
     tableid: newtable,
     seat:seat,
-    qrcode: generateQRCode('https://85f9-2403-6200-88a2-aa85-5cb1-d321-58ac-d2a0.ngrok-free.app /customer/promotion/' + newtable,'public/uploads/table'+newtable+'.jpg', newtable)
   })
   Table.saveTable(data);
   res.redirect('/edittable');

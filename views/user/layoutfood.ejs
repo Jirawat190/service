@@ -26,8 +26,8 @@
         <%=table%>
       </span>
     </div>
-
-    <a href="/customer/cart/<%=table%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
+    <% Object.values(ran).forEach(function(random) { %>
+    <a href="/customer/cart/<%=table%>/<%=random.random%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
         alt="cart" class="iconcart"></a>
 
     <input hidden type="text" value="<%=table%>" id="adminInput" placeholder="Enter Admin Notification">
@@ -42,21 +42,21 @@
 
     <nav class="navbar">
       <ul>
-        <li><a href="/customer/promotion/<%=table%>"><img src="/public/images/icon/Promotion.png" alt="Promotion"
+        <li><a href="/customer/promotion/<%=table%>/<%=random.random%>"><img src="/public/images/icon/Promotion.png" alt="Promotion"
               class="iconmenu"><br>Promotion</a></li>
-        <li><a href="/customer/allmenu/ของคาว/<%=table%>"><img src="/public/images/icon/dish.png" alt="dish"
+        <li><a href="/customer/allmenu/ของคาว/<%=table%>/<%=random.random%>"><img src="/public/images/icon/dish.png" alt="dish"
               class="iconmenu"><br>ของคาว</a></li>
-        <li><a href="/customer/allmenu/ของหวาน/<%=table%>"><img src="/public/images/icon/dessert.png" alt="dessert"
+        <li><a href="/customer/allmenu/ของหวาน/<%=table%>/<%=random.random%>"><img src="/public/images/icon/dessert.png" alt="dessert"
               class="iconmenu"><br>ของหวาน</a></li>
-        <li><a href="/customer/allmenu/ของทานเล่น/<%=table%>"><img src="/public/images/icon/Snacks.png" alt="Snacks"
+        <li><a href="/customer/allmenu/ของทานเล่น/<%=table%>/<%=random.random%>"><img src="/public/images/icon/Snacks.png" alt="Snacks"
               class="iconmenu"><br>ของทานเล่น</a></li>
-        <li><a href="/customer/allmenu/เครื่องดื่ม/<%=table%>"><img src="/public/images/icon/drink.png" alt="drink"
+        <li><a href="/customer/allmenu/เครื่องดื่ม/<%=table%>/<%=random.random%>"><img src="/public/images/icon/drink.png" alt="drink"
               class="iconmenu"><br>เครื่องดื่ม</a></li>
       </ul>
     </nav>
-
+    
     <div>
-      <form action="/customer/gettextsearch/<%=table%>" method="post" style="margin-top: 20px;">
+      <form action="/customer/gettextsearch/<%=table%>/<%=random.random%>" method="post" style="margin-top: 20px;">
         <a class="search-box" style="padding-right: 2%;">
           <i class="uil uil-search"></i>
           <input type="text" onkeyup="sendData(this)" name="keysearch" placeholder="ค้นหารายการอาหาร"
@@ -66,7 +66,7 @@
         <!-- <button type="submit">ค้นหา</button> -->
       </form>
     </div>
-
+    
 
   </div>
   <script type="module">
@@ -86,7 +86,7 @@
   <script>
     function sendData(e) {
       const searchResults = document.getElementById('searchResults');
-      fetch('getResult', {
+      fetch('getResult/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -115,7 +115,7 @@
 
 
   </script>
-
+<% }) %>
   <div class="board">
 
 

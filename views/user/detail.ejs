@@ -18,11 +18,12 @@
 </head>
 
 <body>
+    <% Object.values(ran).forEach(function(random) { %>
     <header>
         <img src='/public/images/logobander.png' alt='imagebander' class='imgbander'>
-        <a href="/customer/promotion/<%=table%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
+        <a href="/customer/promotion/<%=table%>/<%=random.random%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
                 class='iconchevron_left'></a>
-        <a href="/customer/cart/<%=table%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
+        <a href="/customer/cart/<%=table%>/<%=random.random%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
                 alt="cart" class="iconcart"></a>
     </header>
 
@@ -71,6 +72,7 @@
                             <% } else { %>
                                 <p hidden>nooooo</p>
                                 <% } %>
+                                <% }) %>
         </div>
         <input class="form-control" id="comment" placeholder="รายละเอียดเพิ่มเติม" type="text"
             style="font-size: 20px; width: 80%; margin-left: auto; margin-right: auto; display: block; margin-top: 15px;">

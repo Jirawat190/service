@@ -18,12 +18,13 @@
 </head>
 
 <body>
+    <% Object.values(ran).forEach(function(random) { %>
     <header>
         <img src='/public/images/logobander.png' alt='imagebander' class='imgbander'>
-        <a href="/customer/promotion/<%=table%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
+        <a href="/customer/promotion/<%=table%>/<%=random.random%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
                 class='iconchevron_left'></a>
 
-        <a href="/customer/cart/<%=table%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
+        <a href="/customer/cart/<%=table%>/<%=random.random%>" style="text-decoration: none;"><img src="/public/images/icon/cart.png"
                 alt="cart" class="iconcart"></a>
     </header>
 
@@ -77,6 +78,7 @@
             style="width: 35%; margin-top: 15px; margin-bottom: 15px;">เพิ่มลงตะกร้า</button>
 
     </div>
+    <% }) %>
     <script src="/public/javascripts/addtocart.js"></script>
 </body>
 

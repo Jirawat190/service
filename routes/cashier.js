@@ -14,6 +14,7 @@ const Typefood = require('../models/Typefood');
 const multer = require('multer');
 const Option = require('../models/Option');
 const Table = require('../models/Table');
+const Random = require('../models/Random');
 
 /* หน้าแรกบัญชีกลาง */
 router.get('/index', async (req, res, next) => {
@@ -34,8 +35,10 @@ router.post('/addtoorder/:tableid', async (req, res, next) => {
     let menu = await Table.findOne({ tableid: table }).exec();
 
     try {
+        Random.deleteMany({tableid:table}).exec();
+        let qrcode = '';
         let status = false;
-        await Table.updateOne({ tableid: table }, { $set: { statustable: status } }).exec();
+        await Table.updateOne({ tableid: table }, { $set: { statustable: status, qrcode: qrcode } }).exec();
         console.log(table);
         console.log('อาหาร >', menu);
         console.log('ราคารวม >', data.sum);

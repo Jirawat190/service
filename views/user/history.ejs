@@ -14,9 +14,9 @@
 </head>
 
 <body>
-
+    <% Object.values(ran).forEach(function(random) { %>
     <header>
-        <a href="/customer/cart/<%=table%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
+        <a href="/customer/cart/<%=table%>/<%=random.random%>"><img src='/public/images/icon/chevron_left.png' alt='chevron_left'
                 class='iconchevron_left'></a>
         <div style="margin-top: -62px;; font-size: 25px;">
             <p style="text-align: center;">ประวัติรายการที่สั่ง</p>
@@ -75,6 +75,7 @@
                 </div>
                 
             </div>
+            <% }) %>
             <% }) %>
             <% }) %>
     </div>

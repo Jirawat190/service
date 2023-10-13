@@ -13,33 +13,68 @@ const { ReturnDocument } = require('mongodb');
 const Option = require('../models/Option');
 const Cart = require('../models/Cart');
 const Order = require('../models/Order');
+const Random = require('../models/Random');
 
 
 
 /* หน้าแรกโปรโมชั่นลูกค้า */
-router.get('/promotion/:table', async (req, res, next) => {
+router.get('/promotion/:table/:random', async (req, res, next) => {
   let table = req.params.table;
-  let menu = await Promotion.find().exec();
-  console.log(menu);
-  res.render('./user/promotion', { promotion: menu, table: table });
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
+
+    if (random == dom.random) {
+      let menu = await Promotion.find().exec();
+      console.log(menu);
+      res.render('./user/promotion', { promotion: menu, table: table, ran: ran });
+    } else {
+      res.render('./user/thank');
+    }
+  }
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
+
 });
 
 /* หน้าของอาหาร */
-router.get('/allmenu/:type/:table', async (req, res, next) => {
+router.get('/allmenu/:type/:table/:random', async (req, res, next) => {
   try {
     let type = req.params.type;
     let table = req.params.table;
     console.log(type, table);
 
-    const menus = await Menu.find({ typefood: type }).exec();
 
-    // Check the status property of each menu item
-    const filteredMenus = menus.filter(menu => menu.status === true);
+    let random = req.params.random;
+    let ran = await Random.find({ random: random }).exec();
+    try {
+      let dom = ran[0];
+      console.log(dom.random);
+      if (random == dom.random) {
+        const menus = await Menu.find({ typefood: type }).exec();
 
-    if (filteredMenus.length > 0) {
-      console.log(filteredMenus);
-      res.render('./user/allmenu', { menus: filteredMenus, table: table, type: type });
-    } 
+        // Check the status property of each menu item
+        const filteredMenus = menus.filter(menu => menu.status === true);
+
+        if (filteredMenus.length > 0) {
+          console.log(filteredMenus);
+          res.render('./user/allmenu', { menus: filteredMenus, table: table, type: type , ran:ran });
+        }
+      } else {
+        res.render('./user/thank');
+      }
+    }
+    catch (error) {
+      console.error(error);
+      // Redirect or send an error response as needed
+      res.render('./user/thank');
+    }
+
   } catch (error) {
     // Handle any errors that occur during database query or rendering
     console.error(error);
@@ -50,39 +85,88 @@ router.get('/allmenu/:type/:table', async (req, res, next) => {
 
 
 //รายละเอียด
-router.get('/detail/:id/:table', async (req, res, next) => {
+router.get('/detail/:id/:table/:random', async (req, res, next) => {
   let menu = req.params.id
   let table = req.params.table
-  let options = '';
-  let detail = await Menu.findOne({ _id: menu }).exec();
-  let option = await Menu.findOne({ _id: menu }).distinct('option').exec();
-  console.log(detail);
-  console.log(option);
-  if (option == '') {
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
 
-  } else {
-    options = await Option.find({ _id: { $in: option } }).exec()
-    console.log(options);
+    if (random == dom.random) {
+      let options = '';
+      let detail = await Menu.findOne({ _id: menu }).exec();
+      let option = await Menu.findOne({ _id: menu }).distinct('option').exec();
+      console.log(detail);
+      console.log(option);
+      if (option == '') {
+
+      } else {
+        options = await Option.find({ _id: { $in: option } }).exec()
+        console.log(options);
+      }
+      res.render('./user/detail', { detail: detail, option: options, table: table , ran:ran });
+    } else {
+      res.render('./user/thank');
+    }
   }
-  res.render('./user/detail', { detail: detail, option: options, table: table });
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
 });
 
 //รายละเอียดโปรโมชั่น
-router.get('/detailpro/:id/:table', async (req, res, next) => {
+router.get('/detailpro/:id/:table/:random', async (req, res, next) => {
   let promotion = req.params.id
   let table = req.params.table
-  let pro = await Promotion.findOne({ _id: promotion }).exec();
-  res.render('./user/detailpro', { pro: pro, table: table });
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
+
+    if (random == dom.random) {
+      let pro = await Promotion.findOne({ _id: promotion }).exec();
+      res.render('./user/detailpro', { pro: pro, table: table, ran:ran });
+    } else {
+      res.render('./user/thank');
+    }
+  }
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
 });
 
 //ส่งผลการค้นหา
-router.post('/gettextsearch/:table', async (req, res) => {
+router.post('/gettextsearch/:table/:random', async (req, res) => {
   let keysearch = await req.body.keysearch
   let table = req.params.table
-  let saerch_result = await Menu.find({ name: { $regex: new RegExp('^' + keysearch + ',*', 'i') } }).exec();
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
+
+    if (random == dom.random) {
+      let saerch_result = await Menu.find({ name: { $regex: new RegExp('^' + keysearch + ',*', 'i') } }).exec();
   console.log(keysearch)
-  res.render('./user/search', { menus: saerch_result, table: table })
+  res.render('./user/search', { menus: saerch_result, table: table ,ran:ran })
   console.log(saerch_result)
+    } else {
+      res.render('./user/thank');
+    }
+  }
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
+  
 })
 
 //แสดงรายการที่ตรงกัน
@@ -126,19 +210,50 @@ router.post('/addmenutocart', async (req, res) => {
 });
 
 /* หน้าของตะกร้า */
-router.get('/cart/:table', async (req, res, next) => {
+router.get('/cart/:table/:random', async (req, res, next) => {
   let table = req.params.table;
-  let cart = await Cart.find({ tableid: table }).exec()
-  res.render('./user/cart', { table: table, cart: cart });
-  console.log(cart);
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
+
+    if (random == dom.random) {
+      let cart = await Cart.find({ tableid: table }).exec()
+      res.render('./user/cart', { table: table, cart: cart, ran:ran });
+      console.log(cart);
+    } else {
+      res.render('./user/thank');
+    }
+  }
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
 });
 
 /* หน้าของประวัติ */
-router.get('/history/:table', async (req, res, next) => {
+router.get('/history/:table/:random', async (req, res, next) => {
   let table = req.params.table;
-  let history = await Table.find({ tableid: table }).exec()
-  res.render('./user/history', { table: table, history: history });
+  let random = req.params.random;
+  let ran = await Random.find({ random: random }).exec();
+  try {
+    let dom = ran[0];
+    console.log(dom.random);
 
+    if (random == dom.random) {
+      let history = await Table.find({ tableid: table }).exec()
+      res.render('./user/history', { table: table, history: history,ran:ran });
+    } else {
+      res.render('./user/thank');
+    }
+  }
+  catch (error) {
+    console.error(error);
+    // Redirect or send an error response as needed
+    res.render('./user/thank');
+  }
 });
 
 //ลบอาหารในตะกร้า
@@ -153,16 +268,17 @@ router.post('/addtotable/:table', async (req, res) => {
   let table = req.params.table;
   let orders = req.body;
   console.log(table);
-  try {
-    let cart = await Cart.find({ tableid: table }).exec();
-    console.log(cart);
-    await Table.updateOne({ tableid: table }, { $push: { order: cart } }).exec();
-    await Cart.deleteMany({ tableid: table }).exec();
-    res.status(200).json({ message: 'Menu added to cart and saved successfully' });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+  
+      try {
+        let cart = await Cart.find({ tableid: table }).exec();
+        console.log(cart);
+        await Table.updateOne({ tableid: table }, { $push: { order: cart } }).exec();
+        await Cart.deleteMany({ tableid: table }).exec();
+        res.status(200).json({ message: 'Menu added to cart and saved successfully' });
+      } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
 });
 
 

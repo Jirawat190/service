@@ -18,6 +18,7 @@ const TableSchema = new mongoose.Schema({
     }],
     pricesum: Number,
     statustable: Boolean,
+    token : String,
     qrcode: String,
 });
 

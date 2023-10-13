@@ -12,9 +12,11 @@ const Menu = require('../models/Menu');
 const Typefood = require('../models/Typefood');
 const multer = require('multer');
 const Option = require('../models/Option');
+const Random = require('../models/Random');
 const Order = require('../models/Order');
 const Table = require('../models/Table');
 const GenQR = require('../public/javascripts/genqrcode');
+const generateQRCode = require('../public/javascripts/genqrcode');
 
 /* หน้าแรกบัญชีกลาง */
 router.get('/index', async (req, res, next) => {
@@ -60,7 +62,6 @@ router.get('/gen/:tableid', async (req, res) => {
     let table = req.params.tableid
     let qr = await Table.findOne({ tableid: table }).exec();
     console.log(qr);
-    
     res.render('./middleaccount/qrreceipt', { qr: qr }); // Check this path
 });
 
@@ -69,8 +70,25 @@ router.post('/status/:table', async (req, res) => {
     console.log(table);
     let sta = req.body.value
     console.log(sta);
-    let status = sta;
-    await Table.updateOne({ tableid: table }, { $set: { statustable: status } }).exec();
+    let random = req.body.randomString
+    console.log(random);
+
+    if (sta == true) {
+        let qrcode = generateQRCode('https://09a032fdd871e900.ngrok.app/customer/promotion/' + table + '/' + random, 'public/uploads/table' + table + '.jpg', table)
+        console.log(qrcode);
+        let data = new Random({
+            random: random,
+            tableid: table
+        })
+        Random.saveRandom(data);
+        let status = sta;
+        await Table.updateOne({ tableid: table }, { $set: { statustable: status, qrcode: qrcode } }).exec();
+    } else {
+        Random.deleteMany({tableid:table}).exec();
+        let status = sta;
+        let qrcode = '';
+        await Table.updateOne({ tableid: table }, { $set: { statustable: status, qrcode: qrcode } }).exec();
+    }
     res.status(200).json({ message: 'status successfully' });
 });
 
